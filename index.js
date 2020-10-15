@@ -41,7 +41,13 @@ class Airplane {
 */
 
 class Person {
-
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  eat(){
+    
+  }
 }
 
 /*
@@ -59,7 +65,9 @@ class Person {
 */
 
 class Car {
+  constructor(model,milesPerGallon) {
 
+  }
 }
 
 /*
@@ -75,7 +83,9 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  constructor(obj){
 
+  }
 }
 
 /*
@@ -93,7 +103,9 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 class Instructor {
+  constructor(obj){
 
+  }
 }
 
 /*
@@ -112,7 +124,9 @@ class Instructor {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 class Student {
+  constructor(obj){
 
+  }
 }
 
 /*
@@ -129,7 +143,9 @@ class Student {
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
 class ProjectManager {
+  constructor(obj){
 
+  }
 }
 
 /*
