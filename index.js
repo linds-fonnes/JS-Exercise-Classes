@@ -41,8 +41,28 @@ class Airplane {
 */
 
 class Person {
-
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(someFood){
+    if(this.stomach.length < 10){
+      this.stomach.push(someFood);
+    }
+  }
+  poop(){
+    this.stomach = [];
+  }
+  toString(){
+    return `${this.name}, ${this.age}`;
+  }
 }
+
+const person1 = new Person('Lindsey',24);
+person1.eat('Potato');
+person1.poop();
+person1.toString();
 
 /*
   TASK 2
@@ -59,9 +79,29 @@ class Person {
 */
 
 class Car {
-
+constructor(model,milesPerGallon){
+this.model = model;
+this.milesPerGallon= milesPerGallon;
+this.tank = 0;
+this.odometer = 0;
 }
-
+fill(gallons){
+  this.tank = gallons + this.tank;
+}
+drive(distance){
+  if (distance >= (this.tank * this.milesPerGallon)){
+    this.odometer = this.odometer + (this.tank * this.milesPerGallon);
+    this.tank = 0;
+    return (`I ran out of fuel at ${this.odometer} miles`)
+  } else if (distance < (this.tank * this.milesPerGallon)) {
+    this.odometer = this.odometer + distance;
+    this.tank = ((this.tank * this.milesPerGallon) - distance) / this.milesPerGallon;
+  }
+}
+}
+const car1 = new Car('Jeep Wrangler',22);
+car1.fill(50);
+car1.drive(100);
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -75,9 +115,17 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+constructor(attributes){
+this.name = attributes.name;
+this.age = attributes.age;
+this.location = attributes.location;
 }
-
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
+}
+const lambdaperson1 = new Lambdasian('Lindsey', 24 ,'Hurricane');
+lambdaperson1.speak();
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
@@ -92,9 +140,31 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
+class Instructor extends Lambdasian {
+constructor(attributes){
+super(attributes);
+this.specialty = attributes.specialty;
+this.favLanguage = attributes.favLanguage;
+this.catchPhrase = attributes.catchPhrase;
 }
+demo(subject){
+return `Today we are learning about ${subject}`
+};
+grade(student,subject){
+return `${student} receives a perfect score on ${subject}`
+};
+}
+
+const instructor1 = new Instructor({
+  name: 'Troy',
+  age: 400,
+  location: 'MISSISSIPPI',
+  specialty: 'WOWING us with Chef Skills while Programming',
+  favLanguage: 'German & JavScript',
+  catchPhrase: 'BACK AT IT AGAIN'
+});
+instructor1.demo('python');
+instructor1.grade('Lindsey','Everything');
 
 /*
   TASK 5
@@ -110,24 +180,51 @@ class Instructor {
         + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
+      
 */
-class Student {
-
+class Student extends Lambdasian{
+constructor(attributes){
+  super(attributes);
+  this.previousBackground = attributes.previousBackground;
+  this.className = attributes.className;
+  this.favSubjects = attributes.favSubjects;
+}
+listSubjects(favSubjects){
+  return `Loving ${favSubjects}!`;
+}
+PRAssignment(subject){
+return `${student1.name} has subbmited a PR for ${subject}`;
+}
+sprintChallenge(subject){
+return `${student1.name} has begun sprint challenge on ${subject}`;
+}
 }
 
-/*
-  TASK 6
-    - Write a ProjectManager class extending Instructor.
-    - Its constructor takes a single argument - an object with the following keys:
-        + All the keys used to initialize instances of Instructor.
-        + `gradClassName`: i.e. CS1
-        + `favInstructor`: i.e. Sean
-    - Its constructor calls the parent constructor passing to it what it needs.
-    - The constructor should also initialize `gradClassName` and `favInstructor` properties on the instance.
-    - ProjectManager instances have the following methods:
-        + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
-        + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
-*/
+const student1 = new Student({
+  name: 'Lindsey',
+  age: 24,
+  location: 'Hurricane',
+  previousBackground: 'Cosmetologist',
+  className: 'Web38',
+  favSubjects: ['HTML','CSS','JS'],
+})
+student1.listSubjects();
+student1.PRAssignment('lemon');
+student1.sprintChallenge('lemon');
+
+// // /*
+//   TASK 6
+//     - Write a ProjectManager class extending Instructor.
+//     - Its constructor takes a single argument - an object with the following keys:
+//         + All the keys used to initialize instances of Instructor.
+//         + `gradClassName`: i.e. CS1
+//         + `favInstructor`: i.e. Sean
+//     - Its constructor calls the parent constructor passing to it what it needs.
+//     - The constructor should also initialize `gradClassName` and `favInstructor` properties on the instance.
+//     - ProjectManager instances have the following methods:
+//         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
+//         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
+// */
 class ProjectManager {
 
 }
