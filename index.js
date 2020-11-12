@@ -151,7 +151,7 @@ demo(subject){
 return `Today we are learning about ${subject}`
 };
 grade(student,subject){
-return `${student} receives a perfect score on ${subject}`
+return `${student.name} receives a perfect score on ${subject}`
 };
 }
 
@@ -164,7 +164,7 @@ const instructor1 = new Instructor({
   catchPhrase: 'BACK AT IT AGAIN'
 });
 instructor1.demo('python');
-instructor1.grade('Lindsey','Everything');
+
 
 /*
   TASK 5
@@ -190,7 +190,7 @@ constructor(attributes){
   this.favSubjects = attributes.favSubjects;
 }
 listSubjects(favSubjects){
-  return `Loving ${favSubjects}!`;
+  return `Loving ${this.favSubjects}, ${this.favSubjects}, ${this.favSubjects}!`;
 }
 PRAssignment(subject){
 return `${student1.name} has subbmited a PR for ${subject}`;
@@ -201,7 +201,7 @@ return `${student1.name} has begun sprint challenge on ${subject}`;
 }
 
 const student1 = new Student({
-  name: 'Lindsey',
+  name: 'Matt',
   age: 24,
   location: 'Hurricane',
   previousBackground: 'Cosmetologist',
@@ -211,6 +211,7 @@ const student1 = new Student({
 student1.listSubjects();
 student1.PRAssignment('lemon');
 student1.sprintChallenge('lemon');
+instructor1.grade(student1,'Everything');
 
 // // /*
 //   TASK 6
@@ -225,10 +226,31 @@ student1.sprintChallenge('lemon');
 //         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
 //         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 // */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+constructor(attributes){
+  super(attributes);
+  this.gradClassName = attributes.gradClassName;
+  this.favInstructor = attributes.favInstructor
 }
-
+standUp(channel){
+return `${this.name} announces to ${channel}, @channel standy times!`
+}
+debugsCode(student,subject){
+return `${this.name} debugs ${student.name}'s code on ${subject}`
+}
+}
+const projectman1 = new ProjectManager ({
+name: 'Joe',
+age: 14,
+location: 'WILD WILD WEST',
+speciality: 'Managing',
+favLanguage: 'Portugese (doesnt know code)',
+catchPhrase: 'Get to work !',
+gradClassName: 'EIEIO',
+favInstructor: 'Michaelangelo',
+});
+projectman1.standUp('Web37');
+projectman1.debugsCode(student1,'teriyaki');
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
